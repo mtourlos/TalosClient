@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "628059506862",
+    "project_id": "firebase-talos"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628059506862:android:b424b280c18eecaf",
+        "android_client_info": {
+          "package_name": "org.talos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628059506862-105iev17ufhm6hhgerbs0i8tparaqo28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.talos",
+            "certificate_hash": "127FC9C603EFD179DD6341CD52FA4C782B478205"
+          }
+        },
+        {
+          "client_id": "628059506862-nb4naa6jo2sibfteo4f9rcnhcias64gm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeiQOVnzp2OcR5t2NkdcwtmokcaP3BKlw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

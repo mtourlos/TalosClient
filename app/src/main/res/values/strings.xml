@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Talos</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_send">Send</string>
+    <string name="button_strtService">Start Test Service</string>
+    <string name="button_stpService">Stop Test Service</string>
+    <string name="button_storeData">Store to local DB</string>
+    <string name="button_previewData">Load from local DB</string>
+    <string name="button_deleteData">Clear DB</string>
+    <string name="settings_server_category_title">Server Information</string>
+    <string name="settings_server_ip_address">Ip Address</string>
+    <string name="settings_server_ip_address_comment">Ip address of server</string>
+    <string name="settings_server_ip_address_title">IP</string>
+    <string name="settings_user_category_title">User Information</string>
+    <string name="settings_user">User</string>
+    <string name="settings_user_comment">Active User</string>
+    <string name="settings_user_title">IP</string>
+    <string name="main_alerDialog_title">GPS Must be enabled</string>
+    <string name="main_alerDialog_message">Do you want to enable GPS?</string>
+    <string name="enable">Enable</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="sign_out">Sign out</string>
+    <string name="revoke">Revoke</string>
+    <string name="settings_accuracy_title">Accuracy</string>
+
+    <string name="default_ip_server">192.168.1.2</string>
+
+</resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+
+    <TextView
+        android:id="@+id/active_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/active_user"/>
+
+    <TextView
+        android:id="@+id/server_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/server_ip"/>
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/timestamp"/>
+
+    <TextView
+        android:id="@+id/signal_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/signal_out"/>
+
+    <TextView
+        android:id="@+id/operator_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/signal_out" />
+
+    <TextView
+        android:id="@+id/network_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/network_type" />
+
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/lat" />
+
+    <TextView
+        android:id="@+id/lon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/lon" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send"
+        android:onClick="sData"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_strtService"
+        android:onClick="startService"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_stpService"
+        android:onClick="stopService"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_storeData"
+        android:onClick="storePilotData"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_previewData"
+        android:onClick="loadLocalDb"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_deleteData"
+        android:onClick="clearDb"/>
+
+</LinearLayout>
