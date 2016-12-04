@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="@string/settings_server_category_title" >
-        <EditTextPreference
-            android:title="@string/settings_server_ip_address"
-            android:summary="@string/settings_server_ip_address_comment"
-            android:defaultValue="@string/default_ip_server"
-            android:key="settings_server_ip"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/settings_user_category_title" >
-        <EditTextPreference
-            android:title="@string/settings_user"
-            android:summary="@string/settings_user_comment"
-            android:key="settings_active_user"/>
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/settings_accuracy_title" >
         <ListPreference
             android:title="@string/settings_accuracy_title"
@@ -23,6 +8,22 @@
             android:entryValues="@array/accuracy_values"
             android:defaultValue="5"
             android:key="settings_accuracy"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_user_category_title" >
+        <EditTextPreference
+            android:title="@string/settings_user"
+            android:summary="@string/settings_user_comment"
+            android:key="settings_active_user"
+            android:editable="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_server_category_title" >
+        <EditTextPreference
+            android:title="@string/settings_server_ip_address"
+            android:summary="@string/settings_server_ip_address_comment"
+            android:defaultValue="@string/default_ip_server"
+            android:key="settings_server_ip"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

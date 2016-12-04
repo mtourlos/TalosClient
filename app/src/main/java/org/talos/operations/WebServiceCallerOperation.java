@@ -110,7 +110,7 @@ public class WebServiceCallerOperation extends AsyncTask<Void, Void, String> {
         HttpResponse response = null;
 
         try {
-            if (taskType.getMethod().equals(WebServiceMethodEnum.POST)) {
+            if (WebServiceMethodEnum.POST.equals(taskType.getMethod())) {
                 HttpPost httppost = new HttpPost(url);
                 String entity = params.toString();
                 System.out.println(entity);
@@ -119,7 +119,7 @@ public class WebServiceCallerOperation extends AsyncTask<Void, Void, String> {
                 httppost.setHeader("Content-type", "application/json");
                 httppost.setEntity(se);
                 response = httpclient.execute(httppost);
-            }else if(taskType.getMethod().equals(WebServiceMethodEnum.GET)){
+            }else if(WebServiceMethodEnum.GET.equals(taskType.getMethod())){
                 HttpGet httpget = new HttpGet(url);
                 response = httpclient.execute(httpget);
             }

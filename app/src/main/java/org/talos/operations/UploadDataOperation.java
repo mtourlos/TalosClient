@@ -42,8 +42,8 @@ public class UploadDataOperation {
 
     public void uploadData() throws InterruptedException, ExecutionException, JSONException, IllegalAccessException {
         DataDbOperations dbOp = new DataDbOperations(context);
-        String response = "Processing";
         if (dbOp.dataExists()) {
+            String response = null;
             WebServiceCallerOperation wst = new WebServiceCallerOperation(WebServiceEnum.SEND_DATA, context, response);
             wst.setParams(getEntity());
             wst.execute();

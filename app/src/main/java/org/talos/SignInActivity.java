@@ -27,6 +27,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
+    SettingsUtils sUtils = new SettingsUtils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,9 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.revoke_button).setOnClickListener(this);
-        findViewById(R.id.main_activity_button).setOnClickListener(this);
+//        findViewById(R.id.revoke_button).setOnClickListener(this);
+//        findViewById(R.id.main_activity_button).setOnClickListener(this);
+        updateUI();
     }
 
     @Override
@@ -68,8 +70,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
                         updateSettings(null);
+                        updateUI();
                         Toast.makeText(SignInActivity.this, "sign out", Toast.LENGTH_SHORT).show();
                         // [END_EXCLUDE]
                     }
@@ -83,7 +85,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
+                        updateSettings(null);
+                        updateUI();
                         Toast.makeText(SignInActivity.this, "revoked", Toast.LENGTH_SHORT).show();
                         // [END_EXCLUDE]
                     }
@@ -106,7 +109,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            updateSettings(acct.getEmail());
             RegisterUserOperation ruOp = new RegisterUserOperation(getApplicationContext());
             ruOp.setEmail(acct.getEmail());
             String[] name = acct.getDisplayName().split(" ");
@@ -118,6 +120,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 e.printStackTrace();
             }
             if (ruOp.getIsOperationsSuccess()){
+                updateSettings(acct.getEmail());
+                updateUI();
                 Toast.makeText(this, "Registration success!" + acct.getEmail() + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
                 Intent mainAcc = new Intent(this, MainActivity.class);
                 startActivity(mainAcc);
@@ -132,16 +136,17 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         }
     }
 
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
+    private void updateUI() {
+        if (sUtils.isUserLoggedIn(this)) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
     }
 
     private void updateSettings(String user){
-        SettingsUtils sUtils = new SettingsUtils();
         sUtils.updateSetting(this, SettingEnum.ACTIVE_USER, user);
     }
 
@@ -153,14 +158,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 break;
             case R.id.sign_out_button:
                 signOut();
-                break;
-            case R.id.revoke_button:
-                revokeAccess();
-                break;
-            case R.id.main_activity_button:
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
-                this.finish();
                 break;
         }
     }

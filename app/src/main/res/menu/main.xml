@@ -7,6 +7,10 @@
         app:showAsAction="never"/>
 
     <item android:id="@+id/sign_out_prop"
-        android:title="@string/sign_out"
+        android:title="@string/account"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/debug_prop"
+        android:title="@string/debug"
         app:showAsAction="never"/>
 </menu>

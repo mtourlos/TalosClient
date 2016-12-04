@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import org.talos.R;
 import org.talos.enums.SettingEnum;
 
 /**
@@ -20,6 +21,7 @@ public class SettingsUtils {
     }
 
     public String getSetting(Context context, SettingEnum setting){
+        PreferenceManager.setDefaultValues(context, R.xml.settings, false);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPrefs.getString(setting.getKey(), null);
     }

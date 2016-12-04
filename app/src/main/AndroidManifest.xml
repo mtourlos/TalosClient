@@ -17,7 +17,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/talos"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -36,6 +36,11 @@
             android:name=".services.TalosService"
             android:enabled="true"
             android:exported="true" />
+        <service android:name=".services.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <receiver
             android:name=".services.NetworkChangeReceiver"
@@ -48,7 +53,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".DebugActivity"></activity>
     </application>
 
 </manifest>

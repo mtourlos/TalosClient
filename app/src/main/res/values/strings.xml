@@ -24,8 +24,15 @@
     <string name="cancel">Cancel</string>
     <string name="title_activity_settings">Settings</string>
     <string name="sign_out">Sign out</string>
+    <string name="account">Account</string>
     <string name="revoke">Revoke</string>
     <string name="settings_accuracy_title">Accuracy</string>
+    <string name="debug">Debug</string>
+    <string name="welcome">Welcome back</string>
+    <string name="notification_message">Recording of data started</string>
+    <string name="service_status">Service status:</string>
+    <string name="running">Running</string>
+    <string name="stopped">Stopped</string>
 
     <string name="default_ip_server">192.168.1.2</string>
 

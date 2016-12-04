@@ -1,7 +1,5 @@
 package org.talos;
 
-import org.talos.R;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

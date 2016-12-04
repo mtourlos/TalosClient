@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sign_in"
     android:layout_width="match_parent"
@@ -8,42 +8,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="org.talos.SignInActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="org.talos.SignInActivity"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@mipmap/talos"
+        android:layout_weight="0.15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="80sp"
+        android:text="@string/app_name"/>
+
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp" />
-
-    <Button
-        android:id="@+id/revoke_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/revoke"
-        android:layout_above="@+id/sign_in_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="0dp" >
+    </com.google.android.gms.common.SignInButton>
 
     <Button
         android:id="@+id/sign_out_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_out"
-        android:layout_above="@+id/revoke_button"
-        android:layout_alignLeft="@+id/revoke_button"
-        android:layout_alignStart="@+id/revoke_button"
-        android:layout_marginBottom="44dp" />
+        android:layout_marginBottom="0dp" />
 
-    <Button
-        android:id="@+id/main_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:layout_marginBottom="87dp"
-        android:layout_above="@+id/sign_out_button"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+</LinearLayout>

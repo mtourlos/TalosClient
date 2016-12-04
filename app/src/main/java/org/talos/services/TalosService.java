@@ -40,10 +40,10 @@ import android.widget.Toast;
 
 
 public class TalosService extends Service implements LocationListener {
+    private static final String TAG = "TalosService";
     // broadcast strings
     public static final String LOCATION_MESSAGE = "org.talos.services.LocationService.LOCATION_CHANGED";
     public static final String LOCATION_RESULT = "org.talos.services.LocationService.REQUEST_PROCESSED";
-    private static final String TAG = "TalosService";
     LocalBroadcastManager locationBroadcaster;
     // indicates how to behave if the service is killed
     int mStartMode;
@@ -95,7 +95,9 @@ public class TalosService extends Service implements LocationListener {
 
     // signal listeners
     TelephonyManager Tel;
-    MyPhoneStateListener SignalStrengthListener;
+    MyPhoneStateListener signalStrengthListener;
+
+    SettingsUtils sUtils = new SettingsUtils();
 
     public class TalosBinder extends Binder {
         public TalosService getService() {
@@ -109,9 +111,9 @@ public class TalosService extends Service implements LocationListener {
         loadSettings();
         locationBroadcaster = LocalBroadcastManager.getInstance(this);
         checkGPSStatus();
-        SignalStrengthListener = new MyPhoneStateListener();
+        signalStrengthListener = new MyPhoneStateListener();
         Tel = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        Tel.listen(SignalStrengthListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+        Tel.listen(signalStrengthListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
         operatorName = Tel.getNetworkOperatorName();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = LocationManager.GPS_PROVIDER;
@@ -135,15 +137,14 @@ public class TalosService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
-            SettingsUtils su = new SettingsUtils();
-            String stringValue = su.getSetting(this, SettingEnum.ACCURACY);
+            String stringValue = sUtils.getSetting(this, SettingEnum.ACCURACY);
             int accuracy = Integer.parseInt(stringValue);
             locationManager.requestLocationUpdates(provider, accuracy, 1, this);
         }catch (SecurityException e){
             Log.d(TAG, e.toString());
             // TODO: 27/9/2016 handle the fucking exception
         }
-        notificationBuild("Talos service is up and running", true);
+        notificationBuild(true);
         return mStartMode;
     }
 
@@ -190,6 +191,7 @@ public class TalosService extends Service implements LocationListener {
         dbOp.storeData(bean);
         dbOp.close();
         broadcast();
+        Log.d(TAG, "Data stored");
     }
 
     @Override
@@ -224,11 +226,11 @@ public class TalosService extends Service implements LocationListener {
         }
     }
 
-    private void notificationBuild(String message, Boolean ongoing) {
+    private void notificationBuild(Boolean ongoing) {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        mBuilder.setContentTitle("Talos");
-        mBuilder.setContentText(message);
+        mBuilder.setSmallIcon(R.mipmap.talos);
+        mBuilder.setContentTitle(getResources().getString(R.string.app_name));
+        mBuilder.setContentText(getResources().getString(R.string.notification_message));
         mBuilder.setOngoing(ongoing);
 
         Intent resultIntent = new Intent(this, MainActivity.class);
@@ -246,10 +248,8 @@ public class TalosService extends Service implements LocationListener {
         mNotificationManager.notify(notificationID, mBuilder.build());
 
         try {
-            Uri notification = RingtoneManager
-                    .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
-                    notification);
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -341,9 +341,9 @@ public class TalosService extends Service implements LocationListener {
     }
 
     public boolean loadSettings() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        serverIp = sharedPrefs.getString(MainActivity.KEY_PREF_SERVER_IP, "");
-        activeUser = sharedPrefs.getString(MainActivity.KEY_PREF_ACTIVE_USER, "");
+        activeUser = sUtils.getSetting(this, SettingEnum.ACTIVE_USER);
+        serverIp = sUtils.getSetting(this, SettingEnum.SERVER_IP);
+
         return true;
     }
 
