@@ -12,6 +12,9 @@ public enum WebServiceEnum {
 
     SEND_DATA("datas", WebServiceMethodEnum.POST);
 
+    public static final String SERVER_IP_PARAMETER = ":serverIp";
+    private static final String COMPLETE_URL = "http://"+ SERVER_IP_PARAMETER +":8080/TalosServer/service/userservice/";
+
     private final String url;
 
     private final WebServiceMethodEnum method;
@@ -22,7 +25,7 @@ public enum WebServiceEnum {
     }
 
     public String getUrl() {
-        return url;
+        return COMPLETE_URL + url;
     }
 
     public WebServiceMethodEnum getMethod(){

@@ -41,15 +41,11 @@ public class WebServiceCallerOperation extends AsyncTask<Void, Void, String> {
     private static final int CONN_TIMEOUT = 3000;
     private static final int SOCKET_TIMEOUT = 5000;
     private static final String TAG = "WebServiceCallerOp";
-    private static final String URL_PREFIX = "http://";
-    private static final String URL_SUFIX = ":8080/TalosServer/service/userservice/";
     private Context context = null;
-
     private WebServiceEnum taskType;
-
     private JSONObject params;
-
     private String response;
+    SettingsUtils sUtils = new SettingsUtils();
 
     public WebServiceCallerOperation(WebServiceEnum taskType, Context context, String response) {
         this.taskType = taskType;
@@ -67,7 +63,7 @@ public class WebServiceCallerOperation extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        String url = getUrl();
+        String url = getUrlReplacingIp();
         String result = "";
         HttpResponse response = doResponse(url);
 
@@ -151,11 +147,9 @@ public class WebServiceCallerOperation extends AsyncTask<Void, Void, String> {
         return total.toString();
     }
 
-    private String getUrl(){
-        String url;
-        SettingsUtils su = new SettingsUtils();
-        String serverIp = su.getSetting(context, SettingEnum.SERVER_IP);
-        url = URL_PREFIX + serverIp + URL_SUFIX + taskType.getUrl();
+    private String getUrlReplacingIp(){
+        String serverIp = sUtils.getSetting(context, SettingEnum.SERVER_IP);
+        String url = taskType.getUrl().replace(WebServiceEnum.SERVER_IP_PARAMETER, serverIp);
         return url;
     }
 
